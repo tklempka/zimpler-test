@@ -2,6 +2,7 @@ package api
 
 import (
 	"errors"
+	"fmt"
 	"github.com/gocolly/colly/v2"
 	"regexp"
 	"strconv"
@@ -15,7 +16,7 @@ func (z ZimplerPageContext) getAll() ([]Person, error) {
 	c := colly.NewCollector()
 
 	c.OnHTML("*[id=\"top.customers\"]", func(e *colly.HTMLElement) {
-		
+
 		// Prepare date
 		whitespaces := regexp.MustCompile(`\s+`)
 		read_line := strings.ReplaceAll(e.Text, "\n", "")
@@ -38,7 +39,7 @@ func (z ZimplerPageContext) getAll() ([]Person, error) {
 			case 2:
 				number, err := strconv.Atoi(element)
 				if err != nil {
-					error = &Error{Err: errors.New("Unknown structure")}
+					error = &Error{Err: errors.New(fmt.Sprintf("Element is not a number - %v", element))}
 					break
 				}
 				person.Eaten = number
