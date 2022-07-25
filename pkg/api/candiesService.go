@@ -75,7 +75,11 @@ func selectFavouriveSnacks(p []Person) ([]PersonFavouriteCandies, error) {
 	}
 
 	// append last person
-	favCandy := PersonFavouriteCandies{Name: lastPerson.Name, FavouriteSnack: currentFavouriteCandyName, TotalSnacks: totalCandyEaten}
+	favCandy := PersonFavouriteCandies{
+		Name:           lastPerson.Name,
+		FavouriteSnack: currentFavouriteCandyName,
+		TotalSnacks:    totalCandyEaten,
+	}
 	personFavouriteSnacks = append(personFavouriteSnacks, favCandy)
 
 	return personFavouriteSnacks, nil

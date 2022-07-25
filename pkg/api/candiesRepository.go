@@ -51,7 +51,9 @@ func (z ZimplerPageContext) getAll() ([]Person, error) {
 		result = append(result, person)
 	})
 
-	c.Visit(z.Url)
+	if err := c.Visit(z.Url); err != nil {
+		return nil, err
+	}
 
 	if error != nil {
 		return nil, error
